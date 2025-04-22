@@ -1,0 +1,214 @@
+/* Genel Sayfa Ayarları */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* Kaydırma çubuklarını gizle */
+    font-family: sans-serif;
+    /* Varsayılan yazı tipi */
+    /* Tatlı bir arkaplan gradienti */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    /* Veya daha romantik: */
+    /* background: linear-gradient(to bottom right, #ff758c, #ff7eb3); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    color: white;
+    /* Yazı rengi */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    /* Yazıya hafif gölge */
+}
+
+/* Ana Mesaj Stili ve Animasyonu */
+.main-message {
+    /* Şık yazı tipini kullan */
+    font-family: 'Pacifico', cursive;
+    /* Google Font */
+    font-size: 5rem;
+    /* Büyük yazı boyutu (ekran boyutuna göre ayarlanabilir) */
+    margin-bottom: 10px;
+    /* Fade-in ve hafif büyüme animasyonu */
+    opacity: 0;
+    /* Başlangıçta görünmez */
+    transform: scale(0.8);
+    /* Başlangıçta biraz küçük */
+    animation: fadeInScale 2s ease-out 0.5s forwards;
+    /* Animasyon tanımı */
+}
+
+/* Alt Mesaj Stili ve Animasyonu */
+.sub-message {
+    font-family: 'Dancing Script', cursive;
+    /* Başka şık bir font */
+    font-size: 3.5rem;
+    margin-top: 0;
+    opacity: 0;
+    /* Başlangıçta görünmez */
+    transform: translateY(20px);
+    /* Başlangıçta biraz aşağıda */
+    animation: fadeInSlideUp 2s ease-out 1.5s forwards;
+    /* Daha geç başlayan animasyon */
+    color: #ffe0e5;
+    /* Biraz daha açık bir renk */
+}
+
+/* Animasyon Tanımları (Keyframes) */
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        /* Görünür yap */
+        transform: scale(1);
+        /* Normal boyuta getir */
+    }
+}
+
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        /* Görünür yap */
+        transform: translateY(0);
+        /* Normal pozisyonuna getir */
+    }
+}
+
+/* (Opsiyonel) Uçuşan Kalpler Animasyonu */
+.hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Kalplere tıklanamaz yap */
+    overflow: hidden;
+    z-index: -1;
+    /* Yazının arkasında kalsın */
+}
+
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    /* Kalp boyutu */
+    color: rgba(255, 105, 180, 0.6);
+    /* Pembe renk, hafif şeffaf */
+    animation: floatHeart 10s infinite linear;
+    /* Uçuşma animasyonu */
+    bottom: -50px;
+    /* Başlangıçta ekranın altında */
+    opacity: 0;
+}
+
+/* Farklı kalplere farklı başlangıç pozisyonları ve gecikmeler */
+.heart:nth-child(1) {
+    left: 10%;
+    animation-duration: 12s;
+    animation-delay: 0s;
+}
+
+.heart:nth-child(2) {
+    left: 30%;
+    animation-duration: 8s;
+    animation-delay: 2s;
+    font-size: 1.5rem;
+}
+
+.heart:nth-child(3) {
+    left: 50%;
+    animation-duration: 15s;
+    animation-delay: 1s;
+}
+
+.heart:nth-child(4) {
+    left: 70%;
+    animation-duration: 9s;
+    animation-delay: 3s;
+    font-size: 2.5rem;
+}
+
+.heart:nth-child(5) {
+    left: 90%;
+    animation-duration: 11s;
+    animation-delay: 0.5s;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+        /* Görünür olmaya başla */
+    }
+
+    90% {
+        opacity: 1;
+        /* Kaybolmadan önce görünür kal */
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(720deg);
+        /* Ekranın üstüne doğru uç ve dön */
+        opacity: 0;
+        /* Kaybol */
+    }
+}
+
+
+/* Ekran küçülünce yazı boyutlarını ayarla (Responsive Tasarım) */
+@media (max-width: 600px) {
+    .main-message {
+        font-size: 3rem;
+    }
+
+    .sub-message {
+        font-size: 2rem;
+    }
+
+    .heart {
+        font-size: 1.5rem;
+    }
+}
+
+/* --- Parçacık Efekti Konteyneri --- */
+#particles-js {
+    position: absolute;
+    /* veya fixed */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* Yazının ve diğer animasyonların ARKASINDA kalması için */
+    /* Arka plan rengi veya gradient'i buraya da taşıyabilirsin, body'den kaldırabilirsin */
+    /* background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%); */
+}
+
+/* Body'nin arka planını temizle, eğer gradient'i #particles-js'e taşıdıysan */
+/*
+body, html {
+   background: none;
+}
+*/
+
+/* Uçuşan kalplerin z-index'ini kontrol et, particles'ın önünde ama yazının arkasında olmalı */
+.hearts {
+    /* ... diğer stiller ... */
+    z-index: -1;
+    /* veya 0 eğer particles -2 ise */
+}
+
+/* Yazının (container) z-index'inin pozitif olduğundan emin ol */
+.container {
+    position: relative;
+    /* z-index'in çalışması için */
+    z-index: 1;
+    /* ... diğer stiller ... */
+}
